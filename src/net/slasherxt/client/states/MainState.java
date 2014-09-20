@@ -2,6 +2,7 @@ package net.slasherxt.client.states;
 
 import net.slasherxt.client.map.World;
 import net.slasherxt.client.map.tiles.Database_Tiles;
+import net.slasherxt.client.map.tiles.Tile;
 import net.slasherxt.client.resources.ImageLoader;
 
 import org.lwjgl.input.Mouse;
@@ -16,6 +17,7 @@ public class MainState extends BasicGameState {
 
 	public int id;
 	public int mX, mY;
+	private int width = 800, height = 600;
 	
 	public MainState(int id) {
 		this.id = id;
@@ -41,22 +43,33 @@ public class MainState extends BasicGameState {
 		mY = Mouse.getY();
 		
 		boolean clicked = false;
-		
 		int count = 0;
+	
 		
+		// Setup Tile Clicking!
 		for(int x=0;x<World.tileCount;x++) {
 			for(int y=0;y<World.tileCount;y++) {
-				if((mX > 50 + (World.tileSize*x)) && (mX < 50 + (World.tileSize*x) + World.tileSize) && (mY > 70 + (World.tileSize*y)) && (mY < 70 + (World.tileSize*y) + World.tileSize) && (in.isMouseButtonDown(0)) && (!clicked)) {
+				if((mX > 50 + (World.tileSize*x)) && (mX < 50 + World.tileSize + (World.tileSize*x)) && (mY < height - 50 - (World.tileSize*y)) && (mY > height - 50 - World.tileSize - (World.tileSize*y)) && (in.isMouseButtonDown(0)) && (!clicked)) {
 					clicked = true;
-					System.out.println("Tile: " + count);
-					Database_Tiles.tiles[count].updateType("Field");	
-					break;
+					System.out.println("Clicked Tile[" + count + "]");
+					// TODO Open Tile Options!
+					//Tile.updateImage(Database_Tiles.tiles[count], ImageLoader.field);
+				}
+				if((mX > 50 + (World.tileSize*x)) && (mX < 50 + World.tileSize + (World.tileSize*x)) && (mY < height - 50 - (World.tileSize*y)) && (mY > height - 50 - World.tileSize - (World.tileSize*y)) && (in.isMouseButtonDown(1)) && (!clicked)) {
+					clicked = true;
+					System.out.println("Clicked Tile[" + count + "]");
+					// TODO Open Tile Options!
+					//Tile.updateImage(Database_Tiles.tiles[count], ImageLoader.forest);
 				}
 				
 				count++;
 			}
 		}
 		
+		
+		
+		in.clearMousePressedRecord();
+		in.clearKeyPressedRecord();
 		clicked = false;
 		count = 0;
 	}

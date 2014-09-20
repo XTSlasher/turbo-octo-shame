@@ -37,23 +37,29 @@ public class Tile {
 		return image;
 	}
 	
-	public static void updateImage(Image newImage) {
+	public static Image getImage(Integer id) {
+		return getImage();
+	}
+	
+	public static void updateImage(Tile t, Image newImage) {
 		image = newImage;
+		
+		Database_Tiles.tileImageList.put(t, newImage);
 		
 		getImage();
 	}
 
-	public void updateType(String string) {
+	public void updateType(int id, String string) {
 		type = string;
 		
 		if(string == "Blank") {
-			updateImage(ImageLoader.blank);
+			updateImage(Database_Tiles.tiles[id], ImageLoader.blank);
 		}
 		if(string == "Field") {
-			updateImage(ImageLoader.field);
+			updateImage(Database_Tiles.tiles[id], ImageLoader.field);
 		}
 		if(string == "Forest") {
-			updateImage(ImageLoader.forest);
+			updateImage(Database_Tiles.tiles[id], ImageLoader.forest);
 		}
 	}
 }

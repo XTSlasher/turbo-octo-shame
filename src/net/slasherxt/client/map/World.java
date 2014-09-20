@@ -15,8 +15,8 @@ public class World {
 		for(int x=0;x<tileCount;x++) {
 			for(int y=0;y<tileCount;y++) {
 				g.drawRect(50 + (tileSize*x), 50 + (tileSize*y), tileSize, tileSize);
-				//g.drawString(count + 1 + "", 50 + (tileSize*x) + 5, 50 + (tileSize*y) + 5);
-				g.drawImage(Database_Tiles.tiles[count].getImage(), 50 + (tileSize*x), 50 + (tileSize*y));
+				g.drawImage(Database_Tiles.tileImageList.get(Database_Tiles.tiles[count]), 50 + (tileSize*x), 50 + (tileSize*y));
+								
 				count++;
 			}
 		}
