@@ -1,5 +1,6 @@
 package net.slasherxt.client;
 
+import net.slasherxt.client.console.StartConsole;
 import net.slasherxt.client.states.GameState;
 import net.slasherxt.client.states.LoadState;
 import net.slasherxt.client.states.MainState;
@@ -44,6 +45,8 @@ public class Start extends StateBasedGame {
 		this.getState(mainGame).init(gc, this);
 		
 		this.enterState(mainMenu);
+		
+		new StartConsole();
 	}
 	
 	public static void main(String[] args) {

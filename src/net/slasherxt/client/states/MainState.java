@@ -1,5 +1,6 @@
 package net.slasherxt.client.states;
 
+import net.slasherxt.client.console.Console;
 import net.slasherxt.client.map.World;
 import net.slasherxt.client.map.tiles.Database_Tiles;
 import net.slasherxt.client.map.tiles.Tile;
@@ -51,13 +52,11 @@ public class MainState extends BasicGameState {
 			for(int y=0;y<World.tileCount;y++) {
 				if((mX > 50 + (World.tileSize*x)) && (mX < 50 + World.tileSize + (World.tileSize*x)) && (mY < height - 50 - (World.tileSize*y)) && (mY > height - 50 - World.tileSize - (World.tileSize*y)) && (in.isMouseButtonDown(0)) && (!clicked)) {
 					clicked = true;
-					System.out.println("Clicked Tile[" + count + "]");
 					// TODO Open Tile Options!
 					//Tile.updateImage(Database_Tiles.tiles[count], ImageLoader.field);
 				}
 				if((mX > 50 + (World.tileSize*x)) && (mX < 50 + World.tileSize + (World.tileSize*x)) && (mY < height - 50 - (World.tileSize*y)) && (mY > height - 50 - World.tileSize - (World.tileSize*y)) && (in.isMouseButtonDown(1)) && (!clicked)) {
 					clicked = true;
-					System.out.println("Clicked Tile[" + count + "]");
 					// TODO Open Tile Options!
 					//Tile.updateImage(Database_Tiles.tiles[count], ImageLoader.forest);
 				}

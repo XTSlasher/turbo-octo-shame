@@ -36,7 +36,6 @@ public class Database_Tiles{
 				}
 			}
 			
-			
 			System.out.println("Database Initialized");
 		}
 	}
