@@ -1,6 +1,5 @@
 package net.slasherxt.client.states;
 
-import net.slasherxt.client.console.Console;
 import net.slasherxt.client.map.World;
 import net.slasherxt.client.map.tiles.Database_Tiles;
 import net.slasherxt.client.map.tiles.Tile;
@@ -19,6 +18,8 @@ public class MainState extends BasicGameState {
 	public int id;
 	public int mX, mY;
 	private int width = 800, height = 600;
+	public boolean tileSelected = false;
+	public Tile selectedTile = Database_Tiles.tiles[0];
 	
 	public MainState(int id) {
 		this.id = id;
@@ -35,10 +36,25 @@ public class MainState extends BasicGameState {
 		World.drawMap(g);
 		
 		g.drawString("MX: " + mX + "\nMY: " + mY, 10, 10);
+		
+		g.drawRect(575, 50, 200, 480);
+		
+		if(tileSelected) {
+			Integer[] position = Database_Tiles.tilePosList.get(selectedTile);
+			
+			g.drawString("Tile: " + (Database_Tiles.tileIDList.get(selectedTile)+1) + "\nX: " + (position[0]+1) + "\nY: " + (position[1]+1), 580, 60);
+			g.drawString("Type: " + Database_Tiles.tileTypeList.get(selectedTile), 580, 120);
+			
+			g.drawRect(580, 140, 190, 35);
+			g.drawString("GRASS", 585, 145);
+		}
+		
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		Database_Tiles.updateTiles();
+		
 		Input in = gc.getInput();
 		mX = Mouse.getX();
 		mY = Mouse.getY();
@@ -53,6 +69,8 @@ public class MainState extends BasicGameState {
 				if((mX > 50 + (World.tileSize*x)) && (mX < 50 + World.tileSize + (World.tileSize*x)) && (mY < height - 50 - (World.tileSize*y)) && (mY > height - 50 - World.tileSize - (World.tileSize*y)) && (in.isMouseButtonDown(0)) && (!clicked)) {
 					clicked = true;
 					// TODO Open Tile Options!
+					selectedTile = Database_Tiles.tiles[count];
+					tileSelected = true;
 					//Tile.updateImage(Database_Tiles.tiles[count], ImageLoader.field);
 				}
 				if((mX > 50 + (World.tileSize*x)) && (mX < 50 + World.tileSize + (World.tileSize*x)) && (mY < height - 50 - (World.tileSize*y)) && (mY > height - 50 - World.tileSize - (World.tileSize*y)) && (in.isMouseButtonDown(1)) && (!clicked)) {
@@ -65,8 +83,14 @@ public class MainState extends BasicGameState {
 			}
 		}
 		
-		
-		
+		//g.drawRect(580, 140, 190, 35);
+		if(tileSelected) {
+			if((mX > 580) && (mX < 580 + 190) && (mY < height - 140) && (mY > height - 140 - 35) && (in.isMouseButtonDown(0)) && (!clicked)) {
+				Database_Tiles.tileTypeList.put(selectedTile, "Field");
+			}
+		}	
+			
+			
 		in.clearMousePressedRecord();
 		in.clearKeyPressedRecord();
 		clicked = false;

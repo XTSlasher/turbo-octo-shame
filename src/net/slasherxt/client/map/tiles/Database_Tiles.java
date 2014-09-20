@@ -39,4 +39,22 @@ public class Database_Tiles{
 			System.out.println("Database Initialized");
 		}
 	}
+
+	public static void updateTiles() {
+		for(int i=0;i<tiles.length;i++) {
+			if(tiles[i] != null) {
+				if(tileTypeList.get(tiles[i]) == "Blank") {
+					tileImageList.put(tiles[i], ImageLoader.blank);
+				}
+				if(tileTypeList.get(tiles[i]) == "Field") {
+					tileImageList.put(tiles[i], ImageLoader.field);
+				}
+				if(tileTypeList.get(tiles[i]) == "Forest") {
+					tileImageList.put(tiles[i], ImageLoader.forest);
+				}
+				
+				Tile.updateImage(tiles[i], tileImageList.get(tiles[i]));
+			}
+		}
+	}
 }
