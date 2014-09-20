@@ -1,8 +1,11 @@
 package net.slasherxt.client.states;
 
+import javax.swing.JOptionPane;
+
 import net.slasherxt.client.map.World;
 import net.slasherxt.client.map.tiles.Database_Tiles;
 import net.slasherxt.client.map.tiles.Tile;
+import net.slasherxt.client.player.Player;
 import net.slasherxt.client.resources.ImageLoader;
 
 import org.lwjgl.input.Mouse;
@@ -27,6 +30,9 @@ public class MainState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		if(!Player.playerMade) {
+			Player.createPlayer(JOptionPane.showInputDialog(null, "Please Input your Player Name!"));
+		}
 		ImageLoader.initImages();
 		Database_Tiles.initDatabase();
 	}
@@ -35,7 +41,13 @@ public class MainState extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		World.drawMap(g);
 		
-		g.drawString("MX: " + mX + "\nMY: " + mY, 10, 10);
+		g.drawRect(50, 0, 725, 40);
+		g.drawString("Name: " + Player.playerName, 55, 10);
+		
+		for(int i=0;i<Player.playerData.length;i++) {
+			g.drawString(Player.playerDataStrings[i] + ": " + Player.playerData[i], 200 + (145*i), 10);
+		}
+		
 		
 		g.drawRect(575, 50, 200, 480);
 		
@@ -48,12 +60,12 @@ public class MainState extends BasicGameState {
 			g.drawRect(580, 140, 190, 35);
 			g.drawString("GRASS", 585, 145);
 		}
-		
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Database_Tiles.updateTiles();
+		Player.updatePlayer();
 		
 		Input in = gc.getInput();
 		mX = Mouse.getX();
@@ -68,15 +80,9 @@ public class MainState extends BasicGameState {
 			for(int y=0;y<World.tileCount;y++) {
 				if((mX > 50 + (World.tileSize*x)) && (mX < 50 + World.tileSize + (World.tileSize*x)) && (mY < height - 50 - (World.tileSize*y)) && (mY > height - 50 - World.tileSize - (World.tileSize*y)) && (in.isMouseButtonDown(0)) && (!clicked)) {
 					clicked = true;
-					// TODO Open Tile Options!
 					selectedTile = Database_Tiles.tiles[count];
 					tileSelected = true;
 					//Tile.updateImage(Database_Tiles.tiles[count], ImageLoader.field);
-				}
-				if((mX > 50 + (World.tileSize*x)) && (mX < 50 + World.tileSize + (World.tileSize*x)) && (mY < height - 50 - (World.tileSize*y)) && (mY > height - 50 - World.tileSize - (World.tileSize*y)) && (in.isMouseButtonDown(1)) && (!clicked)) {
-					clicked = true;
-					// TODO Open Tile Options!
-					//Tile.updateImage(Database_Tiles.tiles[count], ImageLoader.forest);
 				}
 				
 				count++;
@@ -86,7 +92,11 @@ public class MainState extends BasicGameState {
 		//g.drawRect(580, 140, 190, 35);
 		if(tileSelected) {
 			if((mX > 580) && (mX < 580 + 190) && (mY < height - 140) && (mY > height - 140 - 35) && (in.isMouseButtonDown(0)) && (!clicked)) {
-				Database_Tiles.tileTypeList.put(selectedTile, "Field");
+				if(Player.money > 100) {
+					Player.money -= 100;
+					Player.residential++;
+					Database_Tiles.tileTypeList.put(selectedTile, "Field");
+				}
 			}
 		}	
 			
