@@ -2,12 +2,15 @@ package net.slasherxt.client.states;
 
 import javax.swing.JOptionPane;
 
+import net.slasherxt.client.console.Console;
 import net.slasherxt.client.map.World;
 import net.slasherxt.client.map.tiles.Database_Tiles;
 import net.slasherxt.client.map.tiles.Tile;
 import net.slasherxt.client.player.Player;
+import net.slasherxt.client.player.SavePlayer;
 import net.slasherxt.client.resources.ImageLoader;
 
+import org.jnbt.IntTag;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -32,6 +35,11 @@ public class MainState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if(!Player.playerMade) {
 			Player.createPlayer(JOptionPane.showInputDialog(null, "Please Input your Player Name!"));
+			try {
+				SavePlayer.save();
+			} catch (Exception e) {
+				Console.outputError("Cannot Save!");
+			}
 		}
 		ImageLoader.initImages();
 		Database_Tiles.initDatabase();
@@ -42,10 +50,10 @@ public class MainState extends BasicGameState {
 		World.drawMap(g);
 		
 		g.drawRect(50, 0, 725, 40);
-		g.drawString("Name: " + Player.playerName, 55, 10);
+		g.drawString("Name: " + Player.playerName.getValue(), 55, 10);
 		
 		for(int i=0;i<Player.playerData.length;i++) {
-			g.drawString(Player.playerDataStrings[i] + ": " + Player.playerData[i], 200 + (145*i), 10);
+			g.drawString(Player.playerDataStrings[i] + ": " + Player.playerData[i].getValue(), 200 + (145*i), 10);
 		}
 		
 		
@@ -89,12 +97,11 @@ public class MainState extends BasicGameState {
 			}
 		}
 		
-		//g.drawRect(580, 140, 190, 35);
 		if(tileSelected) {
 			if((mX > 580) && (mX < 580 + 190) && (mY < height - 140) && (mY > height - 140 - 35) && (in.isMouseButtonDown(0)) && (!clicked)) {
-				if(Player.money > 100) {
-					Player.money -= 100;
-					Player.residential++;
+				if(Player.money.getValue() > 100) {
+					Player.money = new IntTag("Money", Player.money.getValue() - 100);
+					Player.residential = new IntTag("Residential", Player.residential.getValue() + 1);
 					Database_Tiles.tileTypeList.put(selectedTile, "Field");
 				}
 			}

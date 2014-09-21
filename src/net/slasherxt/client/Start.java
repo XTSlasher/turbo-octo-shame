@@ -38,6 +38,8 @@ public class Start extends StateBasedGame {
 	
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
+		new StartConsole();
+		
 		this.getState(mainMenu).init(gc, this);
 		this.getState(options).init(gc, this);
 		this.getState(save).init(gc, this);
@@ -45,8 +47,6 @@ public class Start extends StateBasedGame {
 		this.getState(mainGame).init(gc, this);
 		
 		this.enterState(mainMenu);
-		
-		new StartConsole();
 	}
 	
 	public static void main(String[] args) {

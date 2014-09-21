@@ -2,8 +2,9 @@ package net.slasherxt.client.console;
 
 import javax.swing.JFrame;
 
-@SuppressWarnings("serial")
 public class StartConsole extends JFrame{
+	private static final long serialVersionUID = 1L;
+
 	public StartConsole() {
 		new JFrame();
 		

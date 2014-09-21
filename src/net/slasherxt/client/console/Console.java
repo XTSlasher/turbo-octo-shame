@@ -40,9 +40,9 @@ public class Console extends JPanel implements Runnable {
 		g.setFont(g.getFont().deriveFont(20F));
 		for(int i=0;i<messageLog.length;i++) {
 			if(messageLog[i] == null) {
-				g.drawString("", 5, 210 - (20*i));
+				g.drawString("", 5, 30 + (20*i));
 			} else {
-				g.drawString(messageLog[i], 5, 210 - (20*i));
+				g.drawString(messageLog[i], 5, 30 + (20*i));
 			}
 		}
 	}
