@@ -44,7 +44,7 @@ public class Start extends StateBasedGame {
 		this.getState(options).init(gc, this);
 		this.getState(save).init(gc, this);
 		this.getState(load).init(gc, this);
-		this.getState(mainGame).init(gc, this);
+		//this.getState(mainGame).init(gc, this);
 		
 		this.enterState(mainMenu);
 	}
