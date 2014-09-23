@@ -53,7 +53,7 @@ public class Console extends JPanel implements Runnable {
 			repaint();
 			
 			try {
-				Thread.sleep(2);
+				Thread.sleep(15);
 			} catch (InterruptedException e) {
 				outputError(e.toString());
 			}

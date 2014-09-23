@@ -24,10 +24,15 @@ public class Player {
 		Console.outputMessage("Creating Player");
 		
 		playerName = new StringTag("PlayerName", name);
-		money = new IntTag("Money", 150);
-		industrial = new IntTag("Industrial", 0);
-		commercial = new IntTag("Commercial", 0);
-		residential = new IntTag("Residential", 0);
+		
+		if(LoadPlayer.checkSave()) {
+			updatePlayer();
+		} else {
+			money = new IntTag("Money", 150);
+			industrial = new IntTag("Industrial", 0);
+			commercial = new IntTag("Commercial", 0);
+			residential = new IntTag("Residential", 0);
+		}
 		
 		playerMade = true;
 		
@@ -36,7 +41,7 @@ public class Player {
 		createStorage();
 	}
 
-	private static void createStorage() {
+	public static void createStorage() {
 		Console.outputMessage("Creating Player Data Storage");
 		
 		playerData[0] = money;

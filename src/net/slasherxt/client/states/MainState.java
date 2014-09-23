@@ -6,6 +6,7 @@ import net.slasherxt.client.console.Console;
 import net.slasherxt.client.map.World;
 import net.slasherxt.client.map.tiles.Database_Tiles;
 import net.slasherxt.client.map.tiles.Tile;
+import net.slasherxt.client.player.LoadPlayer;
 import net.slasherxt.client.player.Player;
 import net.slasherxt.client.player.SavePlayer;
 import net.slasherxt.client.resources.ImageLoader;
@@ -33,14 +34,20 @@ public class MainState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		if(LoadPlayer.checkSave()) {
+			LoadPlayer.loadPlayer();
+		}
+		
 		if(!Player.playerMade) {
 			Player.createPlayer(JOptionPane.showInputDialog(null, "Please Input your Player Name!"));
-			try {
-				SavePlayer.save();
-			} catch (Exception e) {
-				Console.outputError("Cannot Save!");
-			}
 		}
+		
+		try {
+			SavePlayer.save();
+		} catch (Exception e) {
+			Console.outputError("Cannot Save!");
+		}
+		
 		ImageLoader.initImages();
 		Database_Tiles.initDatabase();
 	}
