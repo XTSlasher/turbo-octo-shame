@@ -3,6 +3,8 @@ package net.slasherxt.client.states;
 import javax.swing.JOptionPane;
 
 import net.slasherxt.client.console.Console;
+import net.slasherxt.client.management.Taxes;
+import net.slasherxt.client.management.Time;
 import net.slasherxt.client.map.World;
 import net.slasherxt.client.map.tiles.Database_Tiles;
 import net.slasherxt.client.map.tiles.Tile;
@@ -34,6 +36,8 @@ public class GameState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		Time.initTime();
+		
 		if(LoadPlayer.checkSave()) {
 			LoadPlayer.loadPlayer();
 		}
@@ -63,6 +67,13 @@ public class GameState extends BasicGameState {
 		
 		g.drawRect(575, 50, 200, 480);
 		
+		g.drawRect(50, 540, 365, 50);
+		g.drawString("Time: " + "  " + Time.y + "       " + Time.mo + "    " + Time.w + "     " + Time.d + "   " + Time.h + "    " + (Time.mi/10), 55, 545);
+		g.drawString("Time: " + "Yrs, " + "Months, " + "Wks, " + "Days, " + "Hrs, " + "Mins", 55, 560);
+		
+		g.drawRect(425, 540, 350, 50);
+		g.drawString("Taxes: " + Taxes.tax.getValue() + "$", 430, 545);
+		
 		if(tileSelected) {
 			Integer[] position = Database_Tiles.tilePosList.get(selectedTile);
 			
@@ -76,6 +87,7 @@ public class GameState extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		Time.tick();
 		Database_Tiles.updateTiles();
 		Player.updatePlayer();
 		
