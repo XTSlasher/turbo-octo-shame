@@ -25,12 +25,12 @@ public class Database_Tiles{
 			
 			for(int x=0;x<World.tileCount;x++){
 				for(int y=0;y<World.tileCount;y++) {
-					tiles[count] = new Tile("Blank", count, x, y, ImageLoader.blank);
+					tiles[count] = new Tile("Forest", count, x, y, ImageLoader.forest);
 					
 					tileIDList.put(tiles[count], count);
 					tileImageList.put(tiles[count], Tile.getImage(tileIDList.get(count)));
 					tilePosList.put(tiles[count], new Integer[]{x, y});
-					tileTypeList.put(tiles[count], "Blank");
+					tileTypeList.put(tiles[count], "Forest");
 					
 					count++;
 				}
@@ -51,6 +51,15 @@ public class Database_Tiles{
 				}
 				if(tileTypeList.get(tiles[i]) == "Forest") {
 					tileImageList.put(tiles[i], ImageLoader.forest);
+				}
+				if(tileTypeList.get(tiles[i]) == "Industrial") {
+					tileImageList.put(tiles[i], ImageLoader.in1);
+				}
+				if(tileTypeList.get(tiles[i]) == "Commercial") {
+					tileImageList.put(tiles[i], ImageLoader.cm1);
+				}
+				if(tileTypeList.get(tiles[i]) == "Residential") {
+					tileImageList.put(tiles[i], ImageLoader.rs1);
 				}
 				
 				Tile.updateImage(tiles[i], tileImageList.get(tiles[i]));

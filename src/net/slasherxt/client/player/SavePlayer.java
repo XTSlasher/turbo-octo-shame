@@ -9,7 +9,7 @@ import org.jnbt.NBTOutputStream;
 
 public class SavePlayer {
 	public static void save() throws Exception {
-		Console.outputMessage("Saving...");
+		Console.outputSystemMessage("Saving...");
 		
 		String path = "saves/";
 		String fileName = "player.dat";
@@ -25,6 +25,6 @@ public class SavePlayer {
 		}
 		out.close();
 		
-		Console.outputMessage("Saving Complete!");
+		Console.outputSystemMessage("Saving Complete!");
 	}
 }

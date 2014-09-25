@@ -61,5 +61,14 @@ public class Tile {
 		if(string == "Forest") {
 			updateImage(Database_Tiles.tiles[id], ImageLoader.forest);
 		}
+		if(string == "Industrial") {
+			updateImage(Database_Tiles.tiles[id], ImageLoader.in1);
+		}
+		if(string == "Commercial") {
+			updateImage(Database_Tiles.tiles[id], ImageLoader.cm1);
+		}
+		if(string == "Residential") {
+			updateImage(Database_Tiles.tiles[id], ImageLoader.rs1);
+		}
 	}
 }

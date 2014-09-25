@@ -8,6 +8,8 @@ public class ImageLoader {
 	
 	// Misc
 	public static Image title;
+	public static Image single;
+	public static Image doubled;
 	
 	// Buttons
 	public static Image button;
@@ -19,6 +21,10 @@ public class ImageLoader {
 	public static Image forest;
 	
 	// Buildings
+	/** Tier 1 */
+	public static Image in1;
+	public static Image cm1;
+	public static Image rs1;
 	
 	// Items
 	
@@ -30,6 +36,8 @@ public class ImageLoader {
 			System.out.println("Loading Images");
 			
 			title = new Image("res/title.png");
+			single = new Image("res/buttons/single.png");
+			doubled = new Image("res/buttons/double.png");
 			
 			button = new Image("res/buttons/buttonOutline.png");
 			overlay = new Image("res/buttons/buttonOverlay.png");
@@ -37,6 +45,10 @@ public class ImageLoader {
 			blank = new Image("res/tiles/blank.png");
 			field = new Image("res/tiles/grass.png");
 			forest = new Image("res/tiles/forest.png");
+			
+			in1 = new Image("res/tiles/buildings/industrial/industrial_t1.png");
+			cm1 = new Image("res/tiles/buildings/commercial/commercial_t1.png");
+			rs1 = new Image("res/tiles/buildings/residential/residential_t1.png");
 			
 			System.out.println("Images Loaded");
 		}	

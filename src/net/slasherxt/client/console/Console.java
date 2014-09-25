@@ -60,14 +60,19 @@ public class Console extends JPanel implements Runnable {
 		}
 	}
 	
-	public static void outputMessage(String message) {
+	public static void outputMessage(String message, String sender) {
 		System.out.println(message);
-		updateLog(message);
+		updateLog("["+sender+"] " + message);
 	}
 	
 	public static void outputError(String error) {
 		System.err.println(error);
-		updateLog(error);
+		updateLog("[ERROR]" + error);
+	}
+	
+	public static void outputSystemMessage(String message) {
+		System.out.println(message);
+		updateLog("[SYSOUT]" + message);
 	}
 	
 	public static void updateLog(String newLog) {

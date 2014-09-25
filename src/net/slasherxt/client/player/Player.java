@@ -21,7 +21,7 @@ public class Player {
 	public static HashMap<String, IntTag> playerStorage = new HashMap<String, IntTag>();
 	
 	public static void createPlayer(String name) {
-		Console.outputMessage("Creating Player");
+		Console.outputSystemMessage("Creating Player");
 		
 		playerName = new StringTag("PlayerName", name);
 		
@@ -36,13 +36,13 @@ public class Player {
 		
 		playerMade = true;
 		
-		Console.outputMessage("Player Created");
+		Console.outputSystemMessage("Player Created");
 		
 		createStorage();
 	}
 
 	public static void createStorage() {
-		Console.outputMessage("Creating Player Data Storage");
+		Console.outputSystemMessage("Creating Player Data Storage");
 		
 		playerData[0] = money;
 		playerData[1] = industrial;
@@ -56,7 +56,7 @@ public class Player {
 		}
 		
 
-		Console.outputMessage("Player Data Storage Created");
+		Console.outputSystemMessage("Player Data Storage Created");
 	}
 	
 	public static void updatePlayer() {		

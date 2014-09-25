@@ -24,7 +24,7 @@ public class LoadPlayer {
 	}
 
 	public static void loadPlayer() {
-		Console.outputMessage("Loading Game!");
+		Console.outputSystemMessage("Loading Game!");
 		
 		String save = "saves/player.dat";
 		
@@ -55,13 +55,13 @@ public class LoadPlayer {
 		
 		Player.createPlayer(Player.playerName.getValue());
 		
-		Console.outputMessage("Loading Complete!");
+		Console.outputSystemMessage("Loading Complete!");
 	}
 	
 	public static Tag getTag(ArrayList<Tag> tags, String str) {
 		for(Tag tag:tags) {
 			if(tag.getName().equals(str)) {
-				Console.outputMessage("Loading: " + tag.getName());
+				Console.outputSystemMessage("Loading: " + tag.getName());
 				return tag;
 			}
 		}

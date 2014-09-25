@@ -3,6 +3,8 @@ package net.slasherxt.client.management;
 import org.jnbt.IntTag;
 
 public class Time {
+	public static boolean doubled = false;
+	
 	public static int y, mo, w, d, h, mi;
 	
 	private static IntTag years;
@@ -34,21 +36,45 @@ public class Time {
 	
 	public static void tick() {
 		mi++;
-		if(mi >= 600) {
-			mi = 1;
-			h++;
-			if(h >= 24) {
-				h = 1;
-				d++;
-				if(d >= 7) {
-					d = 1;
-					w++;
-					if(w >= 4) {
-						w = 1;
-						mo++;
-						if(mo >= 12) {
-							mo = 1;
-							y++;
+		
+		if(!doubled) {
+			if(mi >= 600) {
+				mi = 1;
+				h++;
+				if(h >= 24) {
+					h = 1;
+					d++;
+					if(d >= 7) {
+						d = 1;
+						w++;
+						if(w >= 4) {
+							w = 1;
+							mo++;
+							if(mo >= 12) {
+								mo = 1;
+								y++;
+							}
+						}
+					}
+				}
+			}
+		} else {
+			if(mi >= 100) {
+				mi = 1;
+				h++;
+				if(h >= 24) {
+					h = 1;
+					d++;
+					if(d >= 7) {
+						d = 1;
+						w++;
+						if(w >= 4) {
+							w = 1;
+							mo++;
+							if(mo >= 12) {
+								mo = 1;
+								y++;
+							}
 						}
 					}
 				}
@@ -56,6 +82,7 @@ public class Time {
 		}
 		
 		
+		Payday.updatePayment();
 		Taxes.updateTaxes();
 		updateTime();
 	}
