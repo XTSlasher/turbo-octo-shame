@@ -3,15 +3,15 @@ package net.slasherxt.client.states;
 import javax.swing.JOptionPane;
 
 import net.slasherxt.client.console.Console;
+import net.slasherxt.client.files.Load;
+import net.slasherxt.client.files.Save;
 import net.slasherxt.client.management.Payday;
 import net.slasherxt.client.management.Taxes;
 import net.slasherxt.client.management.Time;
 import net.slasherxt.client.map.World;
 import net.slasherxt.client.map.tiles.Database_Tiles;
 import net.slasherxt.client.map.tiles.Tile;
-import net.slasherxt.client.player.LoadPlayer;
 import net.slasherxt.client.player.Player;
-import net.slasherxt.client.player.SavePlayer;
 import net.slasherxt.client.resources.ImageLoader;
 
 import org.jnbt.IntTag;
@@ -40,8 +40,8 @@ public class GameState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		Time.initTime();
 		
-		if(LoadPlayer.checkSave()) {
-			LoadPlayer.loadPlayer();
+		if(Load.checkSave()) {
+			Load.loadPlayer();
 		}
 		
 		if(!Player.playerMade) {
@@ -49,7 +49,7 @@ public class GameState extends BasicGameState {
 		}
 		
 		try {
-			SavePlayer.save();
+			Save.savePlayer();
 		} catch (Exception e) {
 			Console.outputError("Cannot Save!");
 		}
@@ -161,7 +161,7 @@ public class GameState extends BasicGameState {
 					tileSelected = false;
 				}
 			}
-			if((mX > 580) && (mX < 580 + 190) && (mY < height - 175) && (mY > height - 175 - 35) && (in.isMouseButtonDown(0)) && (!clicked)) {				
+			if((mX > 580) && (mX < 580 + 190) && (mY < height - 175) && (mY > height - 175 - 35) && (in.isMouseButtonDown(0)) && (!clicked) && (validTile)) {				
 				if((Player.money.getValue() >= 100) && (!clicked)) {
 					clicked = true;
 					if(Database_Tiles.tileTypeList.get(selectedTile) != "Industrial") {
@@ -180,7 +180,7 @@ public class GameState extends BasicGameState {
 					tileSelected = false;
 				}
 			}
-			if((mX > 580) && (mX < 580 + 190) && (mY < height - 210) && (mY > height - 210 - 35) && (in.isMouseButtonDown(0)) && (!clicked)) {				
+			if((mX > 580) && (mX < 580 + 190) && (mY < height - 210) && (mY > height - 210 - 35) && (in.isMouseButtonDown(0)) && (!clicked) && (validTile)) {				
 				if((Player.money.getValue() >= 65) && (!clicked)) {
 					clicked = true;
 					if(Database_Tiles.tileTypeList.get(selectedTile) != "Commercial") {
@@ -199,7 +199,7 @@ public class GameState extends BasicGameState {
 					tileSelected = false;
 				}
 			}
-			if((mX > 580) && (mX < 580 + 190) && (mY < height - 245) && (mY > height - 245 - 35) && (in.isMouseButtonDown(0)) && (!clicked)) {				
+			if((mX > 580) && (mX < 580 + 190) && (mY < height - 245) && (mY > height - 245 - 35) && (in.isMouseButtonDown(0)) && (!clicked) && (validTile)) {				
 				if((Player.money.getValue() >= 40) && (!clicked)) {
 					clicked = true;
 					if(Database_Tiles.tileTypeList.get(selectedTile) != "Residential") {

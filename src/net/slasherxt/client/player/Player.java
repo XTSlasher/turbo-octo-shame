@@ -3,6 +3,7 @@ package net.slasherxt.client.player;
 import java.util.HashMap;
 
 import net.slasherxt.client.console.Console;
+import net.slasherxt.client.files.Load;
 
 import org.jnbt.IntTag;
 import org.jnbt.StringTag;
@@ -25,7 +26,7 @@ public class Player {
 		
 		playerName = new StringTag("PlayerName", name);
 		
-		if(LoadPlayer.checkSave()) {
+		if(Load.checkSave()) {
 			updatePlayer();
 		} else {
 			money = new IntTag("Money", 150);

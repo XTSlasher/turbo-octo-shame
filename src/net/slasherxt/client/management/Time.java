@@ -7,12 +7,12 @@ public class Time {
 	
 	public static int y, mo, w, d, h, mi;
 	
-	private static IntTag years;
-	private static IntTag months;
-	private static IntTag weeks;
-	private static IntTag days;
-	private static IntTag hours;
-	private static IntTag minutes;
+	public static IntTag years;
+	public static IntTag months;
+	public static IntTag weeks;
+	public static IntTag days;
+	public static IntTag hours;
+	public static IntTag minutes;
 	
 	public static void initTime() {
 		y = 1;
